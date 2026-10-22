@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#11100e" />
+  <meta name="description" content="Enter PRMD City, the first Egyptian Minecraft server. Java Edition 26.2, powered by Paper." />
+  <title>PRMD City — Minecraft Server</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Marcellus&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section class="intro-sequence" aria-label="PRMD City introduction">
+    <div class="intro-screen">
+      <div class="intro-grain" aria-hidden="true"></div><div class="intro-progress" aria-hidden="true"></div>
+      <div class="prmd-layer"><img src="assets/prmd-presents-mark.png" alt="PRMD presents" /></div>
+      <div class="server-layer"><img src="assets/pharaoh-egypt-logo.png" alt="Pharaoh City — Egypt's 1st Minecraft Server" /><p>PRMD CITY</p><span>MINECRAFT 26.2 <i>·</i> JAVA EDITION <i>·</i> PAPER</span></div>
+      <button class="skip-intro" type="button" data-skip-intro>SKIP INTRO <span>↗</span></button>
+      <div class="scroll-cue" aria-hidden="true"><span></span> SCROLL TO ENTER</div>
+    </div>
+  </section>
+  <div class="announcement"><span class="live-dot"></span> PRMD CITY <span class="announcement-divider">✦</span> MINECRAFT 26.2 <span class="announcement-divider">✦</span> JAVA EDITION</div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="PRMD City home"><img src="assets/pharaoh-server-wordmark.png" alt="Pharaoh City Minecraft Server" /><span class="brand-caption">PRMD CITY · JAVA 26.2</span></a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#home" data-route="home">Home</a><a href="#backpacks" data-route="backpacks">Backpacks</a><a href="#elytra" data-route="elytra">Exotic Elytra</a><a href="#hats" data-route="hats">Exotic Hats</a><a href="#ranks" data-route="ranks">PRMD+</a><a href="#map" data-route="map">Live Map</a>
+    </nav>
+    <div class="header-actions"><a class="cart-button" href="#cart" aria-label="Shopping basket">Shopping basket <span class="cart-count">0</span></a></div>
+  </header>
+  <main id="app"></main>
+  <footer class="site-footer"><div class="footer-inner"><a class="footer-brand" href="#home" aria-label="PRMD City"><img src="assets/pharaoh-server-wordmark.png" alt="Pharaoh City Minecraft Server" /></a><p>PRMD City · Java Edition 26.2 · Paper</p><div class="footer-links"><a href="#store">Store</a><a href="#points">Points</a><a href="#admin">Staff portal</a><a href="https://discord.gg/AC2DExcnP8" target="_blank" rel="noopener noreferrer">Discord</a><a href="#terms">Terms</a></div><small>© 2026 PRMD City. An independent Minecraft community.</small></div></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="api-config.js"></script><script src="map-config.js"></script><script src="app.js"></script>
+</body>
+</html>
