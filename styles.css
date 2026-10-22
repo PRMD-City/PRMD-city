@@ -63,3 +63,16 @@ html{scroll-behavior:smooth;scroll-padding-top:96px}
 .admin-table tbody tr{transition:background 200ms ease}.admin-table tbody tr:hover{background:#e6ad4e08}.field input,.field select,.field textarea{transition:border-color 220ms ease,box-shadow 220ms ease}.field input:focus,.field select:focus,.field textarea:focus{border-color:#c48c3d;box-shadow:0 0 0 3px #c48c3d1c}
 .footer-links a{transition:color 200ms ease,transform 200ms var(--motion-ease)}.footer-links a:hover{color:var(--gold);transform:translateY(-2px)}.site-footer{transition:border-color 240ms ease}.checkout-form{margin-top:20px}.checkout-form .field{margin-bottom:12px}.checkout-form .button:disabled{opacity:.7;cursor:wait}.text-button{display:block;background:none;border:0;color:var(--gold);font-size:10px;padding:5px 0;text-align:left;cursor:pointer}.admin-orders{grid-column:1/-1;margin-top:20px}.admin-orders .admin-top{margin-bottom:15px}.admin-order{border-top:1px solid var(--line);padding:17px 0}.admin-order-head,.admin-order-foot{display:flex;justify-content:space-between;gap:16px;align-items:center}.admin-order-head>div{display:grid;gap:5px}.admin-order-head span,.admin-order-head time{color:var(--muted);font-size:11px}.admin-order ul{list-style:none;margin:12px 0;padding:0}.admin-order li{display:flex;justify-content:space-between;padding:5px 0;color:#c8bdab;font-size:12px}.admin-order-foot>div{display:flex;gap:9px;align-items:center}.admin-order-foot select{background:#100f0d;color:var(--paper);border:1px solid var(--line);padding:8px;font-size:10px}.admin-order-foot>strong{font-family:var(--serif);color:var(--gold)}.admin-orders-list{max-height:620px;overflow:auto;padding-right:6px}
 @media(max-width:650px){.admin-order-head,.admin-order-foot{align-items:flex-start;flex-direction:column}.admin-order-foot>div{width:100%;justify-content:space-between}.admin-order-foot select{flex:1}.admin-orders{padding:17px}}
+/* The pyramid responds to the visitor without changing the existing artwork. */
+.hero-art{appearance:none;-webkit-appearance:none;padding:0;border:0;background:transparent;color:inherit;text-align:left;cursor:crosshair;touch-action:pan-y}
+.hero-art:focus-visible{outline:1px solid var(--gold);outline-offset:12px}
+.pyramid{transform:perspective(800px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));transition:transform 320ms cubic-bezier(.2,.75,.25,1),filter 420ms ease,opacity 420ms ease}
+.sun{transition:transform 420ms ease,opacity 420ms ease,filter 420ms ease}
+.hero-glyph{transform:translate(var(--glyph-x,0px),var(--glyph-y,0px));transition:transform 300ms ease,text-shadow 350ms ease,color 350ms ease}
+.art-caption{transition:color 300ms ease,letter-spacing 300ms ease}
+.hero-art:hover .hero-glyph,.hero-art.is-awake .hero-glyph{color:#ffe5a0;text-shadow:0 0 34px #ffd56aaa,0 0 70px #d89938aa}
+.hero-art.is-awake .sun{opacity:.88;transform:scale(1.12);filter:brightness(1.2)}
+.hero-art.is-awake .pyramid{opacity:.86;filter:drop-shadow(0 0 18px #e5a74366) drop-shadow(0 18px 24px #0009)}
+.hero-art.is-awake .pyramid:after{background:#ffe09a;box-shadow:0 0 18px #ffd36a}
+.hero-art.is-awake .art-caption{color:#f0cf87;letter-spacing:.24em}
+@media(prefers-reduced-motion:reduce){.pyramid,.sun,.hero-glyph,.art-caption{transition:none}}
