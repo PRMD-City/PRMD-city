@@ -1,3 +1,4 @@
+# Keep the project site available on its default github.io URL.
 name: Deploy PRMD City website to GitHub Pages
 
 on:
