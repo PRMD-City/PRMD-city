@@ -34,5 +34,37 @@
   <footer class="site-footer"><div class="footer-inner"><a class="footer-brand" href="#home" aria-label="PRMD City"><img src="assets/pharaoh-egypt-logo.png" alt="Pharaoh City — Egypt's 1st Minecraft Server" /></a><p>PRMD City · Java Edition 26.2 · Paper</p><div class="footer-links"><a href="#store">Store</a><a href="#points">Points</a><a href="#admin">Staff portal</a><a href="https://discord.gg/AC2DExcnP8" target="_blank" rel="noopener noreferrer">Discord</a><a href="#terms">Terms</a></div><small>© 2026 PRMD City. An independent Minecraft community.</small></div></footer>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="api-config.js"></script><script src="map-config.js"></script><script src="app.js"></script>
+<script>
+    (() => {
+      const artwork = (target) => target instanceof Element ? target.closest('.hero-art') : null;
+      document.addEventListener('pointermove', (event) => {
+        const art = artwork(event.target);
+        if (!art || event.pointerType === 'touch') return;
+        const bounds = art.getBoundingClientRect();
+        const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+        const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+        art.style.setProperty('--tilt-x', String(-y * 7) + 'deg');
+        art.style.setProperty('--tilt-y', String(x * 8) + 'deg');
+        art.style.setProperty('--glyph-x', String(x * 8) + 'px');
+        art.style.setProperty('--glyph-y', String(y * 6) + 'px');
+      });
+      document.addEventListener('pointerout', (event) => {
+        const art = artwork(event.target);
+        if (!art || (event.relatedTarget instanceof Node && art.contains(event.relatedTarget))) return;
+        art.style.setProperty('--tilt-x', '0deg');
+        art.style.setProperty('--tilt-y', '0deg');
+        art.style.setProperty('--glyph-x', '0px');
+        art.style.setProperty('--glyph-y', '0px');
+      });
+      document.addEventListener('click', (event) => {
+        const art = artwork(event.target);
+        if (!art) return;
+        const awake = art.classList.toggle('is-awake');
+        art.setAttribute('aria-pressed', String(awake));
+        const caption = art.querySelector('.art-caption');
+        if (caption) caption.textContent = awake ? 'THE EYE IS AWAKE / PRMD CITY' : 'THE DESERT / PRMD CITY';
+      });
+    })();
+  </script>
 </body>
 </html>
