@@ -1,0 +1,540 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>زرعة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@500;700&display=swap">
+<style>
+/* Layout: a phone prototype on one side, a spec sheet (tokens, type, components, flow) on the other; on phones the prototype fills the screen and the spec follows below. */
+:root {
+  --bg: #e9eee9;
+  --app-bg: #fbfcfb;
+  --surface: #ffffff;
+  --fg: #1b2a25;
+  --muted: #5b6d65;
+  --line: #dbe3dd;
+  --primary: #1f5d4a;
+  --primary-ink: #ffffff;
+  --water: #2a78a6;
+  --water-soft: #dcebf4;
+  --sun: #9a6208;
+  --sun-soft: #f6ead0;
+  --frame: #1b2a25;
+  --font-display: "Reem Kufi", "Segoe UI", Tahoma, sans-serif;
+  --font-body: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b110e; --app-bg: #0f1713; --surface: #18221d; --fg: #e6efe9; --muted: #97aba1; --line: #2a3a33;
+    --primary: #6fcaa6; --primary-ink: #0f1713; --water: #6cb8e2; --water-soft: #1b2f3b;
+    --sun: #e0b155; --sun-soft: #3a2f17; --frame: #26352e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b110e; --app-bg: #0f1713; --surface: #18221d; --fg: #e6efe9; --muted: #97aba1; --line: #2a3a33;
+  --primary: #6fcaa6; --primary-ink: #0f1713; --water: #6cb8e2; --water-soft: #1b2f3b;
+  --sun: #e0b155; --sun-soft: #3a2f17; --frame: #26352e;
+  color-scheme: dark;
+}
+
+:root { --soft: color-mix(in srgb, var(--primary) 12%, var(--app-bg)); }
+:root[data-accent="indigo"] { --primary: #4650b8; }
+:root[data-accent="coral"] { --primary: #c2452d; }
+:root[data-accent="ocean"] { --primary: #1c6a96; }
+:root[data-accent="plum"] { --primary: #8a3d86; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-accent="indigo"] { --primary: #a3abff; }
+  :root:not([data-theme="light"])[data-accent="coral"] { --primary: #ff9a85; }
+  :root:not([data-theme="light"])[data-accent="ocean"] { --primary: #7cc4ee; }
+  :root:not([data-theme="light"])[data-accent="plum"] { --primary: #e2a0de; }
+}
+:root[data-theme="dark"][data-accent="indigo"] { --primary: #a3abff; }
+:root[data-theme="dark"][data-accent="coral"] { --primary: #ff9a85; }
+:root[data-theme="dark"][data-accent="ocean"] { --primary: #7cc4ee; }
+:root[data-theme="dark"][data-accent="plum"] { --primary: #e2a0de; }
+.accents { display: flex; flex-wrap: wrap; gap: 10px; }
+.acc { display: flex; align-items: center; gap: 8px; background: var(--app-bg); border: 1.5px solid var(--line); border-radius: 999px; padding: 4px 14px 4px 10px; }
+.acc i { width: 18px; height: 18px; border-radius: 50%; display: block; }
+.acc[aria-pressed="true"] { border-color: var(--primary); }
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.6;
+  direction: rtl; padding-inline: 16px; padding-block: 24px 48px; margin: 0;
+}
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; margin: 0; line-height: 1.3; text-wrap: balance; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--water); outline-offset: 2px; }
+
+.stage { max-width: 1000px; margin-inline: auto; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; justify-content: center; }
+
+/* ---------- Phone ---------- */
+.phone {
+  position: relative; width: min(100%, 390px); height: 780px; flex: 0 0 auto;
+  background: var(--app-bg); border: 8px solid var(--frame); border-radius: 40px; overflow: hidden;
+}
+.screen { position: absolute; inset: 0 0 76px 0; overflow-y: auto; padding: 28px 22px 24px; }
+.screen > * + * { margin-top: 26px; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.top h2 { font-size: 1.7rem; }
+.sub { color: var(--muted); font-size: 0.88rem; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--soft); color: var(--primary); display: grid; place-items: center; font-family: var(--font-display); font-size: 1.1rem; }
+
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.day { text-align: center; padding: 8px 0; border-radius: 14px; font-size: 0.76rem; color: var(--muted); }
+.day b { display: block; font-size: 1.05rem; color: var(--fg); font-weight: 600; }
+.day.on { background: var(--primary); color: var(--primary-ink); }
+.day.on b { color: var(--primary-ink); }
+
+.summary { display: flex; align-items: center; gap: 16px; background: var(--soft); color: var(--primary); border-radius: 20px; padding: 16px 18px; }
+.summary h3 { font-size: 1.2rem; }
+.summary p { margin: 2px 0 0; font-size: 0.88rem; color: var(--muted); }
+.ring { flex: 0 0 auto; }
+.ring text { font-family: var(--font-display); font-size: 17px; fill: var(--primary); }
+
+.tipcard { display: flex; gap: 12px; color: var(--muted); font-size: 0.88rem; }
+.tipcard svg { flex: 0 0 auto; color: var(--sun); }
+.tipcard b { color: var(--fg); font-weight: 600; }
+
+.sec { display: flex; justify-content: space-between; align-items: baseline; }
+.sec h3 { font-size: 1.15rem; }
+.sec span { color: var(--muted); font-size: 0.85rem; }
+
+.tasks { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.tasks > li, .tasks > .rem { border-bottom: 1px solid var(--line); }
+.tasks > li:last-child, .tasks > .rem:last-child { border-bottom: 0; }
+.task { display: flex; align-items: center; gap: 14px; background: transparent; border: 0; padding: 12px 0; width: 100%; text-align: right; }
+.task .name { font-weight: 600; }
+.task .what { color: var(--muted); font-size: 0.84rem; }
+.task .txt { flex: 1; min-width: 0; }
+.check { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; flex: 0 0 auto; color: transparent; }
+.task.done { opacity: 0.5; }
+.task.done .name { text-decoration: line-through; }
+.task.done .check { background: var(--primary); border-color: var(--primary); color: var(--primary-ink); }
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; padding: 0 10px; border-radius: 999px; background: var(--soft); color: var(--primary); }
+.badge.sun { background: var(--soft); color: var(--primary); }
+.badge.green { background: var(--soft); color: var(--primary); }
+
+.pthumb { width: 46px; height: 46px; border-radius: 14px; flex: 0 0 auto; display: grid; place-items: center; overflow: hidden; }
+.pthumb svg { width: 100%; height: 100%; display: block; }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 14px; }
+.pcard { background: transparent; border: 0; text-align: right; padding: 0; display: block; width: 100%; }
+.pcard .pic { aspect-ratio: 1 / 0.9; display: block; width: 100%; border-radius: 20px; overflow: hidden; }
+.pcard .pic svg { width: 100%; height: 100%; display: block; }
+.pcard .info { padding: 10px 2px 0; display: grid; gap: 4px; }
+.pcard .nm { font-weight: 600; }
+.meter { height: 4px; border-radius: 2px; background: var(--soft); overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--primary); border-radius: 2px; }
+.mt { font-size: 0.8rem; color: var(--muted); }
+.add { border: 1.5px dashed var(--line); background: transparent; border-radius: 20px; min-height: 150px; display: grid; place-items: center; color: var(--muted); }
+.add span { display: grid; gap: 6px; justify-items: center; font-size: 0.9rem; }
+
+.search { display: flex; gap: 8px; align-items: center; background: var(--soft); border-radius: 14px; padding: 10px 14px; color: var(--muted); }
+.search input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; color: var(--fg); }
+
+/* ---------- Identify ---------- */
+.cam { margin: -28px -22px 0; height: 520px; position: relative; background: linear-gradient(160deg, #1d2e27, #0c1411 70%); overflow: hidden; display: grid; place-items: center; }
+.cam .leafbg { position: absolute; inset: 0; opacity: 0.55; }
+.frame4 { position: absolute; width: 240px; height: 240px; }
+.frame4 i { position: absolute; width: 38px; height: 38px; border: 4px solid #fff; }
+.frame4 i:nth-child(1) { top: 0; right: 0; border-left: 0; border-bottom: 0; border-radius: 0 14px 0 0; }
+.frame4 i:nth-child(2) { top: 0; left: 0; border-right: 0; border-bottom: 0; border-radius: 14px 0 0 0; }
+.frame4 i:nth-child(3) { bottom: 0; right: 0; border-left: 0; border-top: 0; border-radius: 0 0 14px 0; }
+.frame4 i:nth-child(4) { bottom: 0; left: 0; border-right: 0; border-top: 0; border-radius: 0 0 0 14px; }
+.scanline { position: absolute; inset-inline: 0; height: 3px; background: #7be0b8; box-shadow: 0 0 18px #7be0b8; top: 0; animation: scan 1.4s ease-in-out infinite alternate; }
+@keyframes scan { to { top: calc(100% - 3px); } }
+.camhint { position: absolute; bottom: 20px; inset-inline: 0; text-align: center; color: #fff; font-size: 0.9rem; }
+.camtop { position: absolute; top: 18px; inset-inline: 18px; display: flex; justify-content: space-between; color: #fff; }
+.shutter { margin: 0 auto; width: 74px; height: 74px; border-radius: 50%; border: 4px solid var(--primary); background: var(--surface); display: grid; place-items: center; padding: 0; }
+.shutter i { display: block; width: 52px; height: 52px; border-radius: 50%; background: var(--primary); }
+.result { background: var(--soft); border-radius: 20px; padding: 16px; display: grid; gap: 12px; }
+.result .row { display: flex; gap: 12px; align-items: center; }
+.pct { font-family: var(--font-display); color: var(--primary); font-size: 1.3rem; }
+.btn { background: var(--primary); color: var(--primary-ink); border: 0; border-radius: 14px; padding: 12px 16px; font-weight: 600; width: 100%; display: flex; gap: 8px; justify-content: center; align-items: center; }
+.btn.ghost { background: var(--soft); color: var(--primary); }
+.btn.water { background: var(--water); color: #fff; }
+:root[data-theme="dark"] .btn.water { color: #0b110e; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.water { color: #0b110e; } }
+.demo { font-size: 0.78rem; color: var(--muted); text-align: center; }
+
+/* ---------- Detail ---------- */
+.hero { margin: -28px -22px 0; height: 230px; position: relative; }
+.hero svg { width: 100%; height: 100%; display: block; }
+.back { position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--surface); display: grid; place-items: center; }
+.care { display: grid; gap: 0; margin: 0; }
+.care div { display: grid; grid-template-columns: 38px 1fr; gap: 14px; border-bottom: 1px solid var(--line); padding: 12px 0; align-items: center; }
+.care div:last-child { border-bottom: 0; }
+.care .ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: var(--soft); color: var(--primary); }
+
+.care dt { font-size: 0.78rem; color: var(--muted); }
+.care dd { margin: 0; font-size: 0.92rem; min-width: 0; }
+
+/* ---------- Reminders ---------- */
+.rem { display: flex; align-items: center; gap: 14px; padding: 12px 0; }
+.rem .txt { flex: 1; min-width: 0; }
+.sw { width: 48px; height: 28px; border-radius: 14px; background: var(--line); border: 0; position: relative; padding: 0; flex: 0 0 auto; }
+.sw::after { content: ""; position: absolute; top: 3px; right: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: transform 0.15s; }
+.sw[aria-checked="true"] { background: var(--primary); }
+.sw[aria-checked="true"]::after { transform: translateX(-20px); }
+
+/* ---------- Tab bar ---------- */
+.tabs { position: absolute; inset-inline: 0; bottom: 0; height: 76px; background: var(--app-bg); border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); padding-inline: 8px; align-items: center; }
+.tab { background: transparent; border: 0; display: grid; justify-items: center; gap: 2px; color: var(--muted); font-size: 0.74rem; padding: 6px 0; }
+.tab[aria-current="page"] { color: var(--primary); font-weight: 600; }
+.tab[aria-current="page"] .tic { background: var(--soft); }
+.tic { width: 52px; height: 30px; border-radius: 15px; display: grid; place-items: center; }
+.toast { position: absolute; inset-inline: 18px; bottom: 90px; background: var(--fg); color: var(--app-bg); padding: 10px 14px; border-radius: 12px; font-size: 0.9rem; opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity 0.2s, transform 0.2s; text-align: center; }
+.toast.show { opacity: 1; transform: none; }
+
+/* ---------- Spec sheet ---------- */
+.spec { flex: 1 1 320px; max-width: 520px; min-width: 0; display: grid; gap: 28px; }
+.spec h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); }
+.spec .lead { color: var(--muted); margin: 6px 0 0; max-width: 56ch; }
+.spec h2 { font-size: 1.2rem; margin-bottom: 10px; }
+.sw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.chipc { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); font-size: 0.82rem; }
+.chipc i { display: block; height: 34px; }
+.chipc span { display: block; padding: 4px 10px; }
+.chipc code { direction: ltr; unicode-bidi: isolate; display: inline-block; color: var(--muted); }
+.type { display: grid; gap: 8px; }
+.type div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.type small { color: var(--muted); direction: ltr; unicode-bidi: isolate; white-space: nowrap; }
+.flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.flow span { background: var(--soft); color: var(--primary); border-radius: 8px; padding: 2px 10px; font-size: 0.88rem; }
+.flow em { color: var(--muted); font-style: normal; }
+.spec ul { margin: 0; padding-inline-start: 18px; display: grid; gap: 4px; }
+.themebtn { align-self: start; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; font-size: 0.88rem; }
+@media (max-width: 460px) {
+  body { padding-inline: 0; padding-block-start: 0; }
+  .phone { border-width: 0; border-radius: 0; height: 100svh; min-height: 640px; width: 100%; }
+  .spec { padding-inline: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .scanline { animation: none; top: 50%; } .toast, .sw::after { transition: none; } }
+</style>
+
+<div class="stage" dir="rtl" lang="ar">
+  <div class="phone" id="phone" aria-label="نموذج تفاعلي لتطبيق زرعة">
+    <div class="screen" id="screen"></div>
+    <nav class="tabs" id="tabs" aria-label="التنقل الرئيسي"></nav>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <aside class="spec">
+    <header>
+      <h1>زرعة</h1>
+      <p class="lead">تطبيق لرعاية نباتات البيت. بيذكّرك بالري والتسميد، ويتعرّف على النبات من صورة، وبيعرض لكل نبات التربة والقصرية والسماد المناسب. الشاشة على اليمين نموذج تفاعلي، جرّب تنقل بين الشاشات.</p>
+    </header>
+    <button class="themebtn" id="themeBtn" type="button">بدّل الوضع: فاتح / داكن</button>
+
+    <section>
+      <h2>جرّب لون تاني للتطبيق</h2>
+      <div class="accents" id="accents" role="group" aria-label="لون التطبيق"></div>
+    </section>
+
+    <section>
+      <h2>الألوان</h2>
+      <div class="sw-grid" id="swatches"></div>
+    </section>
+
+    <section>
+      <h2>الخطوط</h2>
+      <div class="type">
+        <div><span style="font-family:var(--font-display);font-size:1.7rem;font-weight:700">عنوان الشاشة</span><small>Reem Kufi 700 / 26</small></div>
+        <div><span style="font-family:var(--font-display);font-size:1.15rem;font-weight:700">عنوان قسم</span><small>Reem Kufi 700 / 18</small></div>
+        <div><span style="font-weight:600">اسم النبات في القائمة</span><small>IBM Plex Sans Arabic 600 / 15</small></div>
+        <div><span style="color:var(--muted);font-size:0.85rem">ملاحظة أو تفصيلة صغيرة</span><small>IBM Plex Sans Arabic 400 / 13</small></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>المقاسات</h2>
+      <ul>
+        <li>مقاس الشاشة 390 × 780 (iPhone 14 تقريباً)، والهامش الجانبي 18</li>
+        <li>زوايا الكروت 16 للقوائم و20 للصور وملخص اليوم</li>
+        <li>المسافة بين العناصر 10 داخل القائمة و18 بين الأقسام</li>
+        <li>شريط التنقل ارتفاعه 76، وأيقونة الشاشة الحالية داخل كبسولة 52 × 30</li>
+        <li>حجم الأيقونات 22، وأقل مساحة لمس 44</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>مسار المستخدم</h2>
+      <div class="flow">
+        <span>اليوم</span><em>←</em><span>تعليم مهمة كمكتملة</span><em>|</em>
+        <span>تعرّف</span><em>←</em><span>تصوير</span><em>←</em><span>نتيجة</span><em>←</em><span>إضافة لنباتاتي</span><em>|</em>
+        <span>نباتاتي</span><em>←</em><span>تفاصيل نبات</span><em>←</em><span>سقيتها دلوقتي</span><em>|</em>
+        <span>تذكيرات</span><em>←</em><span>تشغيل أو إيقاف لكل نبات</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>الأفكار المأخوذة من التطبيقات المرجعية</h2>
+      <ul>
+        <li>قائمة مهام يومية مع تذكير بالري والتسميد (زي Planta)</li>
+        <li>نبرة ودودة وعداد ري لكل نبات (زي Greg)</li>
+        <li>التعرف على النبات بالكاميرا من شاشة مخصصة (زي PictureThis)</li>
+      </ul>
+    </section>
+  </aside>
+</div>
+
+<script>
+/* ---------- Icons ---------- */
+var IC = {
+  home: '<path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>',
+  leaf: '<path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19c3-5 6-8 10-10"/>',
+  cam: '<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+  bell: '<path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21h4"/>',
+  drop: '<path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+  pot: '<path d="M5 9h14l-1.5 10a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1z"/><path d="M4 9h16"/>',
+  soil: '<path d="M3 17c3-3 6-3 9 0s6 3 9 0"/><path d="M3 12c3-3 6-3 9 0s6 3 9 0"/>',
+  flask: '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  back: '<path d="M9 5l7 7-7 7"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  flash: '<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>',
+  search: '<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>',
+  spray: '<path d="M8 10h8v10H8zM10 10V6h4v4M14 7h4"/>'
+};
+function ic(name, size) {
+  size = size || 22;
+  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + IC[name] + '</svg>';
+}
+
+/* ---------- Plant illustrations (original, generic) ---------- */
+function art(kind, tone) {
+  var bg = tone.bg, a = tone.a, b = tone.b, pot = tone.pot;
+  var s = '<svg viewBox="0 0 200 170" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="200" height="170" fill="' + bg + '"/>';
+  if (kind === "leaf") {
+    s += '<g fill="' + a + '"><ellipse cx="100" cy="66" rx="30" ry="44" transform="rotate(-8 100 66)"/><ellipse cx="62" cy="86" rx="22" ry="36" transform="rotate(-38 62 86)" fill="' + b + '"/><ellipse cx="138" cy="86" rx="22" ry="36" transform="rotate(38 138 86)" fill="' + b + '"/></g><path d="M100 120V50" stroke="' + bg + '" stroke-width="2" opacity=".6"/>';
+  } else if (kind === "spike") {
+    s += '<g fill="' + a + '"><path d="M84 124L74 40q10 4 20 0z" /><path d="M100 124L100 24q9 8 18 0z" fill="' + b + '"/><path d="M116 124l12-76q10 6 14 12z"/><path d="M66 124l-18-50q8-2 14 4z" fill="' + b + '"/></g>';
+  } else if (kind === "round") {
+    s += '<g fill="' + a + '"><ellipse cx="100" cy="92" rx="14" ry="30"/><ellipse cx="78" cy="98" rx="12" ry="28" transform="rotate(-35 78 98)" fill="' + b + '"/><ellipse cx="122" cy="98" rx="12" ry="28" transform="rotate(35 122 98)" fill="' + b + '"/><ellipse cx="60" cy="110" rx="10" ry="24" transform="rotate(-65 60 110)"/><ellipse cx="140" cy="110" rx="10" ry="24" transform="rotate(65 140 110)"/></g>';
+  } else {
+    s += '<g fill="' + a + '"><circle cx="76" cy="84" r="17"/><circle cx="104" cy="64" r="19" fill="' + b + '"/><circle cx="128" cy="90" r="16"/><circle cx="100" cy="100" r="17" fill="' + b + '"/><circle cx="82" cy="112" r="12"/><circle cx="122" cy="116" r="12" fill="' + b + '"/></g>';
+  }
+  s += '<path d="M64 124h72l-8 38a4 4 0 0 1-4 3H76a4 4 0 0 1-4-3z" fill="' + pot + '"/><rect x="60" y="120" width="80" height="10" rx="4" fill="' + pot + '"/></svg>';
+  return s;
+}
+var T = {
+  green: { bg: "#d9ece1", a: "#2f7d5f", b: "#4d9c7a", pot: "#b8704a" },
+  lime: { bg: "#e6efd2", a: "#5a8a2c", b: "#7aa845", pot: "#a9694a" },
+  blue: { bg: "#d8e8ef", a: "#3b7f78", b: "#58998f", pot: "#8c97a3" },
+  sand: { bg: "#f1e6d0", a: "#6b8a3a", b: "#8aa653", pot: "#9b6b4f" },
+  pink: { bg: "#f1dfe2", a: "#4d8a5e", b: "#6aa57a", pot: "#7d8a96" }
+};
+
+/* ---------- Data ---------- */
+var PLANTS = [
+  { id: "pothos", n: "بوتس", l: "Epipremnum aureum", k: "herb", tone: "green", every: 8, left: 0, light: "ضوء خافت إلى متوسط", water: "حوالي ¾ كوب كل ٧–١٠ أيام", soil: "بيتموس + بيرلايت (٢ : ١)", pot: "بلاستيك أو فخار ١٥–٢٠ سم بفتحات", feed: "20-20-20 بنص الجرعة كل ٤ أسابيع في الصيف" },
+  { id: "monstera", n: "مونستيرا", l: "Monstera deliciosa", k: "leaf", tone: "green", every: 8, left: 2, light: "ضوء ساطع غير مباشر", water: "حوالي كوب كل ٧–١٠ أيام", soil: "بيتموس + لحاء صنوبر + بيرلايت", pot: "٢٥ سم بفتحات مع عمود تسلق", feed: "20-20-20 كل ٤ أسابيع في موسم النمو" },
+  { id: "snake", n: "سانسيفيريا", l: "Dracaena trifasciata", k: "spike", tone: "sand", every: 18, left: 12, light: "من ضوء خافت لشمس", water: "نص كوب كل ٢–٣ أسابيع", soil: "تربة كاكتس + بيرلايت", pot: "فخار بفتحات", feed: "سماد كاكتس مخفف كل شهرين في الصيف" },
+  { id: "fern", n: "سرخس بوسطن", l: "Nephrolepis exaltata", k: "round", tone: "lime", every: 3, left: 1, light: "ضوء غير مباشر ورطوبة عالية", water: "كل ٣–٤ أيام والتربة رطبة", soil: "بيتموس + لحاء + بيرلايت", pot: "قصرية معلقة بتصريف كويس", feed: "20-20-20 بنص الجرعة كل ٤ أسابيع" },
+  { id: "basil", n: "ريحان", l: "Ocimum basilicum", k: "herb", tone: "lime", every: 2, left: 0, light: "شمس ٦ ساعات", water: "نص إلى كوب يوم بعد يوم في الحر", soil: "خفيفة وغنية وتصريفها كويس", pot: "٢٠–٢٥ سم", feed: "سماد عضوي خفيف كل أسبوعين" },
+  { id: "mint", n: "نعناع", l: "Mentha", k: "herb", tone: "green", every: 3, left: 0, light: "شمس جزئية", water: "حوالي كوب كل ٢–٣ أيام", soil: "بيتموس + كمبوست غنية", pot: "قصرية عريضة لوحده", feed: "سماد عضوي سائل كل ٣–٤ أسابيع" },
+  { id: "aloe", n: "ألوفيرا", l: "Aloe vera", k: "round", tone: "blue", every: 18, left: 9, light: "شمس مباشرة أو ضوء ساطع", water: "ري كامل كل ٢–٣ أسابيع", soil: "تربة كاكتس", pot: "فخار بفتحات", feed: "سماد كاكتس مخفف مرتين في السنة" },
+  { id: "peace", n: "زنبق السلام", l: "Spathiphyllum", k: "leaf", tone: "pink", every: 6, left: 3, light: "ضوء خافت إلى متوسط", water: "حوالي كوب كل ٥–٧ أيام", soil: "بيتموس + بيرلايت + لحاء", pot: "متوسطة بفتحات تصريف", feed: "20-20-20 بربع الجرعة كل ٤–٦ أسابيع" }
+];
+function P(id) { return PLANTS.filter(function (p) { return p.id === id; })[0]; }
+var TASKS = [
+  { id: 1, p: "pothos", t: "ري", done: false },
+  { id: 2, p: "basil", t: "ري", done: false },
+  { id: 3, p: "mint", t: "ري", done: false },
+  { id: 4, p: "fern", t: "رش", done: false },
+  { id: 5, p: "monstera", t: "تسميد", done: false }
+];
+var REM = {};
+PLANTS.forEach(function (p, i) { REM[p.id] = i !== 2 && i !== 6; });
+var S = { screen: "today", plant: null, scan: "idle" };
+
+/* ---------- Helpers ---------- */
+var $screen = document.getElementById("screen");
+var $tabs = document.getElementById("tabs");
+var $toast = document.getElementById("toast");
+var toastT;
+function toast(msg) {
+  $toast.textContent = msg; $toast.classList.add("show");
+  clearTimeout(toastT); toastT = setTimeout(function () { $toast.classList.remove("show"); }, 1800);
+}
+function thumb(p) { return '<span class="pthumb">' + art(p.k, T[p.tone]) + '</span>'; }
+function left(p) {
+  if (p.left <= 0) return "النهارده";
+  if (p.left === 1) return "بكرة";
+  if (p.left === 2) return "بعد يومين";
+  return "بعد " + p.left + " أيام";
+}
+function taskIc(t) { return t === "ري" ? "drop" : t === "رش" ? "spray" : "flask"; }
+
+/* ---------- Screens ---------- */
+function weekStrip() {
+  var now = new Date(), names = ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"];
+  var start = new Date(now); start.setDate(now.getDate() - ((now.getDay() + 1) % 7));
+  var h = '<div class="week" aria-label="أيام الأسبوع">';
+  for (var i = 0; i < 7; i++) {
+    var d = new Date(start); d.setDate(start.getDate() + i);
+    var on = d.toDateString() === now.toDateString();
+    h += '<div class="day' + (on ? ' on' : '') + '"' + (on ? ' aria-current="date"' : '') + '>' + names[d.getDay()] + '<b>' + d.toLocaleDateString("ar-EG", { day: "numeric" }) + '</b></div>';
+  }
+  return h + '</div>';
+}
+function ring(done, total) {
+  var r = 30, c = 2 * Math.PI * r, off = total ? c * (1 - done / total) : c;
+  return '<svg class="ring" width="76" height="76" viewBox="0 0 76 76" role="img" aria-label="' + done + ' من ' + total + ' مهام">' +
+    '<circle cx="38" cy="38" r="' + r + '" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="7"/>' +
+    '<circle cx="38" cy="38" r="' + r + '" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-dasharray="' + c.toFixed(1) + '" stroke-dashoffset="' + off.toFixed(1) + '" transform="rotate(-90 38 38)"/>' +
+    '<text x="38" y="44" text-anchor="middle">' + done + '/' + total + '</text></svg>';
+}
+function vToday() {
+  var now = new Date(), done = TASKS.filter(function (t) { return t.done; }).length;
+  var greet = now.getHours() < 12 ? "صباح الخير" : now.getHours() < 18 ? "نهارك سعيد" : "مساء الخير";
+  var h = '<div class="top"><div><div class="sub">' + now.toLocaleDateString("ar-EG", { weekday: "long", day: "numeric", month: "long" }) + '</div><h2>' + greet + '</h2></div><div class="avatar" aria-hidden="true">ز</div></div>';
+  h += weekStrip();
+  h += '<div class="summary">' + ring(done, TASKS.length) + '<div><h3>' + (done === TASKS.length ? "خلّصت كل المهام" : "فاضل " + (TASKS.length - done) + " مهام") + '</h3><p>' + (done === TASKS.length ? "نباتاتك مرتوية ومبسوطة" : "نباتاتك مستنياك النهارده") + '</p></div></div>';
+  h += '<div class="tipcard">' + ic("sun", 22) + '<div><b>الجو ناشف النهارده.</b> رش السرخس بالماية وزوّد الري للريحان والنعناع.</div></div>';
+  h += '<div class="sec"><h3>مهام النهارده</h3><span>اضغط لتعليم المهمة</span></div><ul class="tasks">';
+  TASKS.forEach(function (t) {
+    var p = P(t.p);
+    h += '<li><button class="task' + (t.done ? ' done' : '') + '" data-act="task" data-id="' + t.id + '" aria-pressed="' + t.done + '">' + thumb(p) +
+      '<span class="txt"><span class="name">' + p.n + '</span><br><span class="what">' + t.t + (t.t === "ري" ? " · " + p.water.split(" كل")[0] : "") + '</span></span>' +
+      '<span class="check">' + ic("check", 16) + '</span></button></li>';
+  });
+  return h + '</ul>';
+}
+function vPlants() {
+  var h = '<div class="top"><div><h2>نباتاتي</h2><div class="sub">' + PLANTS.length + ' نباتات في البيت</div></div><div class="avatar" aria-hidden="true">ز</div></div>';
+  h += '<div class="search">' + ic("search", 18) + '<input id="psearch" type="search" placeholder="دور في نباتاتك" aria-label="بحث في نباتاتي" autocomplete="off"></div>';
+  h += '<div class="grid2" id="plist">' + plantCards("") + '</div>';
+  return h;
+}
+function plantCards(q) {
+  var h = "";
+  PLANTS.filter(function (p) { return !q || p.n.indexOf(q) !== -1; }).forEach(function (p) {
+    var pct = Math.max(8, Math.round((1 - p.left / p.every) * 100));
+    h += '<button class="pcard" data-act="open" data-id="' + p.id + '"><span class="pic">' + art(p.k, T[p.tone]) + '</span><span class="info"><span class="nm">' + p.n + '</span>' +
+      '<span class="meter" aria-hidden="true"><i style="width:' + pct + '%"></i></span><span class="mt">الري: ' + left(p) + '</span></span></button>';
+  });
+  if (!q) h += '<button class="add" data-act="scan"><span>' + ic("plus", 26) + 'ضيف نبات</span></button>';
+  return h;
+}
+function vIdentify() {
+  var h = '<div class="cam"><svg class="leafbg" viewBox="0 0 390 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="#2f7d5f"><ellipse cx="195" cy="250" rx="80" ry="130" transform="rotate(-10 195 250)" opacity=".6"/><ellipse cx="110" cy="300" rx="55" ry="105" transform="rotate(-45 110 300)" fill="#4d9c7a" opacity=".6"/><ellipse cx="290" cy="300" rx="55" ry="105" transform="rotate(45 290 300)" fill="#4d9c7a" opacity=".6"/></g></svg>' +
+    '<div class="camtop"><span>' + ic("flash", 22) + '</span><span>تعرّف على نبات</span><span></span></div>' +
+    '<div class="frame4"><i></i><i></i><i></i><i></i>' + (S.scan === "scanning" ? '<div class="scanline"></div>' : '') + '</div>' +
+    '<div class="camhint">' + (S.scan === "scanning" ? "جاري التعرف على النبات…" : "حط الورقة جوه الإطار وصوّر") + '</div></div>';
+  if (S.scan === "done") {
+    var p = P("monstera");
+    h += '<div class="result"><div class="row">' + thumb(p) + '<div style="flex:1;min-width:0"><b>' + p.n + '</b><br><span class="sub" style="direction:ltr;unicode-bidi:isolate;display:inline-block;font-style:italic">' + p.l + '</span></div><span class="pct">٩٤٪</span></div>' +
+      '<div><span class="badge">' + ic("drop", 12) + ' ري كل ٧–١٠ أيام</span> <span class="badge sun">' + ic("sun", 12) + ' ضوء غير مباشر</span></div>' +
+      '<button class="btn" data-act="open" data-id="monstera">شوف طريقة العناية</button><div class="demo">نتيجة تجريبية في النموذج</div></div>';
+  } else {
+    h += '<button class="shutter" data-act="shoot" aria-label="تصوير"><i></i></button><div class="demo">اضغط على الزر لتجربة التعرف على نبات</div>';
+  }
+  return h;
+}
+function vDetail() {
+  var p = P(S.plant);
+  var h = '<div class="hero">' + art(p.k, T[p.tone]) + '<button class="back" data-act="back" aria-label="رجوع">' + ic("back", 20) + '</button></div>';
+  h += '<div class="top"><div><h2>' + p.n + '</h2><span class="sub" style="direction:ltr;unicode-bidi:isolate;display:inline-block;font-style:italic">' + p.l + '</span></div><span class="badge">' + ic("drop", 12) + ' ' + left(p) + '</span></div>';
+  h += '<dl class="care">' +
+    '<div><span class="ic">' + ic("drop") + '</span><span><dt>الري</dt><dd>' + p.water + '</dd></span></div>' +
+    '<div><span class="ic">' + ic("sun") + '</span><span><dt>الإضاءة</dt><dd>' + p.light + '</dd></span></div>' +
+    '<div><span class="ic">' + ic("soil") + '</span><span><dt>التربة</dt><dd>' + p.soil + '</dd></span></div>' +
+    '<div><span class="ic">' + ic("pot") + '</span><span><dt>القصرية</dt><dd>' + p.pot + '</dd></span></div>' +
+    '<div><span class="ic">' + ic("flask") + '</span><span><dt>السماد</dt><dd>' + p.feed + '</dd></span></div></dl>';
+  h += '<button class="btn" data-act="water" data-id="' + p.id + '">' + ic("drop", 20) + ' سقيتها دلوقتي</button>';
+  return h;
+}
+function vReminders() {
+  var h = '<div class="top"><div><h2>تذكيرات</h2><div class="sub">الإشعار بييجي الساعة ٩ الصبح</div></div><div class="avatar" aria-hidden="true">ز</div></div><div class="tasks">';
+  PLANTS.forEach(function (p) {
+    h += '<div class="rem">' + thumb(p) + '<div class="txt"><div style="font-weight:600">' + p.n + '</div><div class="sub">ري كل ' + p.every + ' يوم تقريباً</div></div>' +
+      '<button class="sw" role="switch" data-act="rem" data-id="' + p.id + '" aria-checked="' + REM[p.id] + '" aria-label="تذكير ' + p.n + '"></button></div>';
+  });
+  return h + '</div>';
+}
+
+/* ---------- Render ---------- */
+var TABS = [
+  { id: "today", n: "اليوم", i: "home" },
+  { id: "plants", n: "نباتاتي", i: "leaf" },
+  { id: "identify", n: "تعرّف", i: "cam" },
+  { id: "reminders", n: "تذكيرات", i: "bell" }
+];
+function render() {
+  var v = S.screen === "today" ? vToday() : S.screen === "plants" ? vPlants() : S.screen === "identify" ? vIdentify() : S.screen === "detail" ? vDetail() : vReminders();
+  $screen.innerHTML = v;
+  var cur = S.screen === "detail" ? "plants" : S.screen;
+  $tabs.innerHTML = TABS.map(function (t) {
+    return '<button class="tab" data-act="tab" data-id="' + t.id + '"' + (t.id === cur ? ' aria-current="page"' : '') + '><span class="tic">' + ic(t.i) + '</span>' + t.n + '</button>';
+  }).join("");
+}
+function go(s) { S.screen = s; if (s !== "identify") S.scan = "idle"; render(); $screen.scrollTop = 0; }
+
+var scanT;
+document.getElementById("phone").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-act]"); if (!b) return;
+  var act = b.getAttribute("data-act"), id = b.getAttribute("data-id");
+  if (act === "tab") go(id);
+  else if (act === "task") { TASKS.forEach(function (t) { if (String(t.id) === id) t.done = !t.done; }); render(); }
+  else if (act === "open") { S.plant = id; go("detail"); }
+  else if (act === "back") go("plants");
+  else if (act === "scan") go("identify");
+  else if (act === "shoot") {
+    S.scan = "scanning"; render(); clearTimeout(scanT);
+    scanT = setTimeout(function () { S.scan = "done"; render(); }, 1600);
+  }
+  else if (act === "water") {
+    var p = P(id); p.left = p.every;
+    TASKS.forEach(function (t) { if (t.p === id && t.t === "ري") t.done = true; });
+    render(); toast("تم تسجيل الري، الجاية " + left(p));
+  }
+  else if (act === "rem") { REM[id] = !REM[id]; b.setAttribute("aria-checked", REM[id]); }
+});
+document.getElementById("phone").addEventListener("input", function (e) {
+  if (e.target.id === "psearch") document.getElementById("plist").innerHTML = plantCards(e.target.value.trim());
+});
+
+/* ---------- Spec swatches & accent picker ---------- */
+var SW = [
+  ["اللون الأساسي", "--primary"], ["خلفية اللون الفاتحة", "--soft"],
+  ["خلفية التطبيق", "--app-bg"], ["الكروت والأسطح", "--surface"],
+  ["النص", "--fg"], ["النص الثانوي", "--muted"], ["الخطوط الفاصلة", "--line"]
+];
+var probe = document.createElement("i"); probe.style.cssText = "position:absolute;width:0;height:0;visibility:hidden"; document.body.appendChild(probe);
+function hex(v) {
+  probe.style.background = "var(" + v + ")";
+  var c = getComputedStyle(probe).backgroundColor, m = c.match(/[\d.]+/g) || [0, 0, 0], r = m.slice(0, 3);
+  if (/^color\(/.test(c)) r = r.map(function (x) { return x * 255; });
+  return "#" + r.map(function (x) { return ("0" + Math.round(+x).toString(16)).slice(-2); }).join("");
+}
+function swatches() {
+  document.getElementById("swatches").innerHTML = SW.map(function (s) {
+    return '<div class="chipc"><i style="background:var(' + s[1] + ')"></i><span>' + s[0] + '<br><code>' + hex(s[1]) + '</code></span></div>';
+  }).join("");
+}
+var ACC = [["indigo", "نيلي", "#4650b8"], ["green", "أخضر", "#1f5d4a"], ["coral", "مرجاني", "#c2452d"], ["ocean", "أزرق بحري", "#1c6a96"], ["plum", "برقوقي", "#8a3d86"]];
+function setAccent(id) {
+  document.documentElement.setAttribute("data-accent", id);
+  Array.prototype.forEach.call(document.getElementById("accents").children, function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-id") === id)); });
+  swatches();
+}
+document.getElementById("accents").innerHTML = ACC.map(function (a) {
+  return '<button type="button" class="acc" data-id="' + a[0] + '" aria-pressed="false"><i style="background:' + a[2] + '"></i>' + a[1] + '</button>';
+}).join("");
+document.getElementById("accents").addEventListener("click", function (e) { var b = e.target.closest(".acc"); if (b) setAccent(b.getAttribute("data-id")); });
+
+document.getElementById("themeBtn").addEventListener("click", function () {
+  var r = document.documentElement, cur = r.getAttribute("data-theme");
+  var sysDark = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+  var isDark = cur ? cur === "dark" : sysDark;
+  r.setAttribute("data-theme", isDark ? "light" : "dark");
+  swatches();
+});
+
+render();
+setAccent("indigo");
+</script>
+
+</body></html>
