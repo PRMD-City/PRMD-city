@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: prmd-city
+    runtime: node
+    plan: starter
+    region: frankfurt
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: PRMD_DB_PATH
+        value: /var/data/prmd-city.sqlite
+      - key: PRMD_MAP_URL
+        sync: false
+    disk:
+      name: prmd-city-data
+      mountPath: /var/data
+      sizeGB: 1

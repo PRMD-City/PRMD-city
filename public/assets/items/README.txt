@@ -1,0 +1,1 @@
+Place original backpack, exotic elytra, and exotic hat product images in this folder. Add each image path and verified EGP price through the staff Admin page. No product images were included with the available source archive.

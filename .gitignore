@@ -1,7 +1,6 @@
-__pycache__/
-*.py[cod]
-*.sqlite3
-server-*.log
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
 .env
-.env.*
-!.env.example
+node_modules/
+npm-debug.log*

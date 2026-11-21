@@ -1,0 +1,19 @@
+{
+  "name": "prmd-city",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node server.mjs",
+    "admin:create": "node scripts/create-admin.mjs"
+  },
+  "dependencies": {
+    "esbuild": "^0.28.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  }
+}

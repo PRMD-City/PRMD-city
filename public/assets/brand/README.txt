@@ -1,0 +1,1 @@
+Original source art is also preserved in the project-level assets folder. These working copies are unchanged: prmd-presents-mark.png, prmd-presents.png, pharaoh-egypt-logo.png, pharaoh-server-wordmark.png, ranks-title.png, and cosmetics-title.png. The page displays all images in full with contain sizing. Optional replacements may use prmd-logo.png and server-logo.png.
