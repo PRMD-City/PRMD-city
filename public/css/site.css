@@ -276,6 +276,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .intro-stage__inner { grid-template-columns: minmax(0, 1fr); align-content: center; gap: var(--space-2xl); }
   .intro-aside { justify-self: start; }
   .identity-stage__inner { grid-template-columns: minmax(0, 1fr) auto; }
+  .identity-stage__inner { padding-top: calc(var(--space-2xl) + 4.5rem); }
   .identity-mark { font-size: clamp(6rem, 24vw, 12rem); }
   .section-head { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
   .chamber-play { grid-template-columns: minmax(0, 1fr); }
@@ -300,7 +301,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .intro-actions { margin-top: var(--space-xl); }
   .intro-aside { max-width: 34ch; }
   .identity-stage { min-height: 68svh; }
-  .identity-stage__inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); padding-block: var(--space-2xl); }
+  .identity-stage__inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); padding-block: var(--space-2xl); padding-top: calc(var(--space-2xl) + 4.5rem); }
   .identity-title { font-size: clamp(3.5rem, 15vw, 5.2rem); }
   .identity-mark { justify-self: end; font-size: 6rem; }
   .scroll-cue { left: var(--gutter); }
@@ -362,4 +363,3 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .identity-title:has(.identity-title-art) { width: 100%; }
   .identity-title-art { max-height: 25svh; }
 }
-
