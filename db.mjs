@@ -72,3 +72,21 @@ CREATE TABLE IF NOT EXISTS sessions (
 CREATE INDEX IF NOT EXISTS sessions_expiry ON sessions(expires_at);
 `);
 
+
+const bootstrapAdminUsername = process.env.PRMD_BOOTSTRAP_ADMIN_USERNAME?.trim();
+const bootstrapAdminPassword = process.env.PRMD_BOOTSTRAP_ADMIN_PASSWORD;
+if (bootstrapAdminUsername || bootstrapAdminPassword) {
+  if (!/^[A-Za-z0-9_]{3,16}$/.test(bootstrapAdminUsername || '') || !bootstrapAdminPassword || bootstrapAdminPassword.length < 12 || bootstrapAdminPassword.length > 128) {
+    throw new Error('PRMD_BOOTSTRAP_ADMIN_USERNAME and a 12–128 character PRMD_BOOTSTRAP_ADMIN_PASSWORD must both be configured.');
+  }
+  const existingAdmin = db.prepare('SELECT role FROM users WHERE minecraft_username=? COLLATE NOCASE').get(bootstrapAdminUsername);
+  if (existingAdmin && existingAdmin.role !== 'admin') {
+    throw new Error('Bootstrap admin username already belongs to a player account; choose a separate staff username.');
+  }
+  if (!existingAdmin) {
+    const { randomBytes, scryptSync } = await import('node:crypto');
+    const salt = randomBytes(16).toString('hex');
+    const hash = scryptSync(bootstrapAdminPassword, salt, 64).toString('hex');
+    db.prepare("INSERT INTO users(minecraft_username,discord_contact,password_salt,password_hash,role) VALUES(?,'',?,?, 'admin')").run(bootstrapAdminUsername, salt, hash);
+  }
+}
