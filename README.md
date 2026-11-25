@@ -22,6 +22,8 @@ The included `render.yaml` describes a Node web service in Frankfurt with a pers
 
 After deployment, open a Render shell and run `npm run admin:create` to create the first staff account. Do not create it in a local copy because that writes to a different database. The database lives at `/var/data/prmd-city.sqlite` on Render's persistent disk. Back it up before changing disk settings or moving hosts.
 
+If the host does not provide a shell, set `PRMD_BOOTSTRAP_ADMIN_USERNAME` and `PRMD_BOOTSTRAP_ADMIN_PASSWORD` as private server environment variables before deployment. The server validates them and creates the account on first startup, hashing the password with scrypt. Keep these variables private; on an ephemeral filesystem, retaining them lets the account be recreated if the database resets.
+
 Deployment does not configure real products, map connectivity, or payment instructions; staff still arrange payments through Discord.
 
 Create the first staff account from a terminal:
