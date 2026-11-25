@@ -292,7 +292,7 @@ function orderItemsLabel(orderNumber) {
 function reactShell(path) {
   const route = ROUTES.get(path);
   const title = route?.title || 'PRMD City';
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="PRMD City, an Egyptian-themed Minecraft community built by friends."><meta name="theme-color" content="#21160f"><title>${esc(title)} — PRMD City</title><link rel="stylesheet" href="/css/site.css"></head><body><div id="root" data-path="${esc(path)}"><main class="page-main utility-page"><div class="container"><h1 class="page-title">Entering PRMD City…</h1><p class="page-deck">Loading the city and checking your account.</p></div></main></div><noscript><main class="page-main utility-page"><div class="container"><h1 class="page-title">Enable JavaScript to enter the city.</h1><p class="page-deck">The PRMD City interactive shop and player area need JavaScript.</p></div></main></noscript><script src="/app-react.js" defer></script></body></html>`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="PRMD City, an Egyptian-themed Minecraft community built by friends."><meta name="theme-color" content="#21160f"><title>${esc(title)} — PRMD City</title><link rel="stylesheet" href="/css/site.css?v=20261125-logo-spacing"></head><body><div id="root" data-path="${esc(path)}"><main class="page-main utility-page"><div class="container"><h1 class="page-title">Entering PRMD City…</h1><p class="page-deck">Loading the city and checking your account.</p></div></main></div><noscript><main class="page-main utility-page"><div class="container"><h1 class="page-title">Enable JavaScript to enter the city.</h1><p class="page-deck">The PRMD City interactive shop and player area need JavaScript.</p></div></main></noscript><script src="/app-react.js" defer></script></body></html>`;
 }
 
 function renderPage(path, user) {
@@ -308,7 +308,7 @@ function renderPage(path, user) {
   if (route.kind === 'points') content = renderPoints(user);
   if (route.kind === 'account') content = renderAccount(user);
   if (route.kind === 'admin') content = renderAdmin(user);
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="PRMD City, an Egyptian-themed Minecraft community built by friends."><title>${esc(route.title)} — PRMD City</title><link rel="stylesheet" href="/css/site.css"><script src="/app.js" defer></script></head><body>${header(path)}<p class="sr-live" data-product-message aria-live="polite"></p>${content}${footer()}</body></html>`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="PRMD City, an Egyptian-themed Minecraft community built by friends."><title>${esc(route.title)} — PRMD City</title><link rel="stylesheet" href="/css/site.css?v=20261125-logo-spacing"><script src="/app.js" defer></script></head><body>${header(path)}<p class="sr-live" data-product-message aria-live="polite"></p>${content}${footer()}</body></html>`;
 }
 
 function userView(user) {
