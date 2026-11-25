@@ -34,7 +34,7 @@ function Header({ path, user, basketCount }) {
   const mobileStore = h('details', null, h('summary', null, 'store'), h('div', { className: 'store-menu' }, ...CATEGORIES.map((item) => h('a', { key: item.key, href: item.path }, item.label))));
   return h('header', { className: 'site-header' },
     h('div', { className: 'container masthead' },
-      h('a', { className: 'brand', href: '/', 'aria-label': 'PRMD City home' }, h('span', { className: 'brand-logo-slot' }, h('img', { className: 'brand__logo', src: '/assets/brand/prmd-presents-mark.png', alt: 'PRMD City' }))),
+      h('a', { className: 'brand', href: '/', 'aria-label': 'PRMD City home' }, h('span', { className: 'brand-logo-slot' }, h('img', { className: 'brand__logo', src: '/assets/brand/prmd-city-logo.png', alt: 'PRMD City' }))),
       h('nav', { className: 'primary-nav', 'aria-label': 'Main navigation' }, link('/', 'home'), storeMenu, link('/live-map', 'live map'), link('/points', 'points'), link('/orders', 'order history')),
       h('div', { className: 'nav-actions' }, h('a', { href: '/basket', 'aria-current': path === '/basket' ? 'page' : undefined }, 'basket', h('span', { className: 'basket-count' }, basketCount)), link('/account', user ? user.minecraftUsername : 'account'), link('/admin', 'staff'))),
     h('nav', { className: 'container mobile-nav', 'aria-label': 'Store and community navigation' }, mobileStore, link('/live-map', 'live map'), link('/points', 'points'), link('/orders', 'orders')));
@@ -68,14 +68,14 @@ function Home({ products, add, mapUrl }) {
             <p className="intro-line">An Egyptian-themed Minecraft world, made by friends and shaped one block at a time.</p>
             <div className="intro-actions"><a className="button intro-skip" href="#city-home">skip the introduction</a></div>
           </div>
-          <figure className="intro-art"><img src="/assets/brand/prmd-presents.png" alt="PRMD presents, Egypt’s first Minecraft server" width="3840" height="2160" /></figure>
+          <figure className="intro-art"><img src="/assets/brand/prmd-city-logo.png" alt="PRMD City" width="1000" height="525" /></figure>
         </div>
         <span className="scroll-cue" aria-hidden="true">scroll to enter</span>
       </section>
       <section className="identity-stage" id="the-city" aria-labelledby="identity-title">
         <div className="container identity-stage__inner">
           <div className="identity-copy">
-            <h2 className="identity-title" id="identity-title"><span className="visually-hidden">Egypt’s 1st Minecraft Server</span><img className="identity-title-art" src="/assets/brand/pharaoh-egypt-logo.png" alt="" width="3840" height="940" /></h2>
+            <h2 className="identity-title" id="identity-title"><span className="visually-hidden">Egypt’s 1st Minecraft Server</span><img className="identity-title-art" src="/assets/brand/prmd-city-minecraft-logo.png" alt="" width="2048" height="612" /></h2>
             <p className="identity-note">PRMD City is a world made by friends. Find your place, meet the city, and leave a little of your own work behind.</p>
           </div>
           <span className="identity-mark" aria-hidden="true">𓂀</span>
@@ -90,7 +90,7 @@ function Home({ products, add, mapUrl }) {
           {[['edition', 'Java Edition 26.2'], ['server software', 'Paper'], ['built by', 'friends']].map(([label, value]) => <div className="server-spec__row" key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
           <div className="server-spec__row"><dt>connection details</dt><dd><a className="text-link" href={DISCORD} target="_blank" rel="noopener noreferrer">ask on Discord</a></dd></div>
         </dl>
-        <div className="server-logo" aria-label="PRMD server logo"><img src="/assets/brand/pharaoh-server-wordmark.png" alt="PRMD server logo" loading="lazy" /></div>
+        <div className="server-logo" aria-label="PRMD server logo"><img src="/assets/brand/prmd-city-minecraft-logo.png" alt="PRMD City Minecraft Server" width="2048" height="612" loading="lazy" /></div>
       </div></section>
       <section className="home-band home-band--shade"><div className="container">
         <div className="section-head"><div><p className="section-label">a tiny desert arcade</p><h2 className="section-title">Raid the pyramid.</h2></div><p className="section-summary">Run, leap traps, and collect scarabs through three increasingly tricky routes. A rotating sun dial follows your journey.</p></div>

@@ -151,7 +151,7 @@ function findBrandAsset(name) {
 }
 
 function brandMark() {
-  const image = findBrandAsset('prmd-logo') || findBrandAsset('prmd-presents-mark');
+  const image = findBrandAsset('prmd-city-logo') || findBrandAsset('prmd-logo') || findBrandAsset('prmd-presents-mark');
   return image ? `<img class="brand__logo" src="${image}" alt="PRMD City">` : `<span class="brand__name">PRMD City</span>`;
 }
 
@@ -202,11 +202,11 @@ function emptyCatalogue(title, isPlus = false) {
 
 function renderHome() {
   const featured = publicProducts(null, 3);
-  const serverLogoFile = findBrandAsset('server-logo') || findBrandAsset('pharaoh-server-wordmark');
-  const serverLogo = serverLogoFile ? `<img src="${serverLogoFile}" alt="PRMD server logo" loading="lazy">` : '<p class="status-text">Server logo will appear here when the supplied file is added.</p>';
+  const serverLogoFile = findBrandAsset('prmd-city-minecraft-logo') || findBrandAsset('server-logo') || findBrandAsset('pharaoh-server-wordmark');
+  const serverLogo = serverLogoFile ? `<img src="${serverLogoFile}" alt="PRMD City Minecraft Server" width="2048" height="612" loading="lazy">` : '<p class="status-text">Server logo will appear here when the supplied file is added.</p>';
   return `<div class="intro-story">
-    <section class="intro-stage" aria-labelledby="intro-title"><div class="container intro-stage__inner"><div class="intro-copy"><h1 class="intro-title" id="intro-title">PRMD presents</h1><p class="intro-line">An Egyptian-themed Minecraft world, made by friends and shaped one block at a time.</p><div class="intro-actions"><a class="button intro-skip" href="#city-home">skip the introduction</a></div></div><figure class="intro-art"><img src="/assets/brand/prmd-presents.png" alt="PRMD presents, Egypt’s first Minecraft server" width="3840" height="2160"></figure></div><span class="scroll-cue" aria-hidden="true">scroll to enter</span></section>
-    <section class="identity-stage" id="the-city" aria-labelledby="identity-title"><div class="container identity-stage__inner"><div class="identity-copy"><h2 class="identity-title" id="identity-title"><span class="visually-hidden">Egypt’s 1st Minecraft Server</span><img class="identity-title-art" src="/assets/brand/pharaoh-egypt-logo.png" alt="" width="3840" height="940"></h2><p class="identity-note">PRMD City is a world made by friends. Find your place, meet the city, and leave a little of your own work behind.</p></div><span class="identity-mark" aria-hidden="true">𓂀</span></div><span class="scroll-cue" aria-hidden="true">enter PRMD City</span></section>
+    <section class="intro-stage" aria-labelledby="intro-title"><div class="container intro-stage__inner"><div class="intro-copy"><h1 class="intro-title" id="intro-title">PRMD presents</h1><p class="intro-line">An Egyptian-themed Minecraft world, made by friends and shaped one block at a time.</p><div class="intro-actions"><a class="button intro-skip" href="#city-home">skip the introduction</a></div></div><figure class="intro-art"><img src="/assets/brand/prmd-city-logo.png" alt="PRMD City" width="1000" height="525"></figure></div><span class="scroll-cue" aria-hidden="true">scroll to enter</span></section>
+    <section class="identity-stage" id="the-city" aria-labelledby="identity-title"><div class="container identity-stage__inner"><div class="identity-copy"><h2 class="identity-title" id="identity-title"><span class="visually-hidden">Egypt’s 1st Minecraft Server</span><img class="identity-title-art" src="/assets/brand/prmd-city-minecraft-logo.png" alt="" width="2048" height="612"></h2><p class="identity-note">PRMD City is a world made by friends. Find your place, meet the city, and leave a little of your own work behind.</p></div><span class="identity-mark" aria-hidden="true">𓂀</span></div><span class="scroll-cue" aria-hidden="true">enter PRMD City</span></section>
   </div>
   <main class="page-main home-main" id="city-home">
     <section class="home-band"><div class="container"><div class="section-head"><div><p class="section-label">the server</p><h2 class="section-title">The city, in its own edition.</h2></div><p class="section-summary">Bring Minecraft Java Edition 26.2. PRMD City runs on Paper. Ask the staff team on Discord for the current server address and connection details.</p></div><dl class="server-spec"><div class="server-spec__row"><dt>edition</dt><dd>Java Edition 26.2</dd></div><div class="server-spec__row"><dt>server software</dt><dd>Paper</dd></div><div class="server-spec__row"><dt>built by</dt><dd>friends</dd></div><div class="server-spec__row"><dt>connection details</dt><dd><a class="text-link" href="${DISCORD_URL}" target="_blank" rel="noopener noreferrer">ask on Discord</a></dd></div></dl><div class="server-logo" aria-label="PRMD server logo">${serverLogo}</div></div></section>
