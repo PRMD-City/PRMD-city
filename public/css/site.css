@@ -356,8 +356,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .intro-art img { max-height: 40svh; }
 }
 @media (max-width: 40rem) {
-  .intro-art { min-height: 220px; }
-  .intro-art img { max-height: 34svh; }
+  .intro-stage__inner { padding-block: clamp(1rem, 3svh, 1.25rem); gap: clamp(1rem, 3svh, 1.25rem); }
+  .intro-art { min-height: 9rem; }
+  .intro-art img { max-height: min(24svh, 10rem); }
   .identity-title:has(.identity-title-art) { width: 100%; }
   .identity-title-art { max-height: 25svh; }
 }
+
